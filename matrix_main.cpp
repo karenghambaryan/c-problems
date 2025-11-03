@@ -1,22 +1,19 @@
 #include "matrix.h"
+#include "car.h"
 #include <iostream>
 
 int main()
 {
-    Matrix m1(3,5);
-    m1.Init();
-    Matrix m2(3,5);
-    m2.Init();
-    Matrix m3(5,3);
-    m3.Init();
+    Matrix m1(2,3);
+    m1[0][0] = Car("BMW", "E60", "Black",2012);
+    m1[0][1] = Car("Toyota", "Camry", "Red",2014);
+    m1[0][2] = Car("Ford", "Focus", "Blue",2020);
+    m1[1][0] = Car("Lada", "Niva", "white",2020);
+    m1[1][1] = Car("Lexus", "Gx", "Blue",2020);
+    m1[1][2] = Car("Tesla", "X", "gray",2024);
+    
     std::cout << m1;
-    m1.Reverse();
-    std::cout << m1;
-    std::cout << m1.Max() << std::endl;
-    std::cout << m1 + m2;
-    std::cout << m1 - m2;
-    std::cout << m3 * 7;
-    std::cout << m1 * m3;
+
 
     return 0;
 }
