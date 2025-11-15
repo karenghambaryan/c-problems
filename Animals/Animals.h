@@ -14,10 +14,11 @@ protected:
 
 public:
     Animals(std::string EatingType, std::string Type, int LegCount, int Age);
-
+    virtual void Sound();
     bool IsCarnivore() const;
     bool IsPet() const;
     bool HasOwner() const;
+    virtual ~Animals();
 };
 
 class Dog : public Animals
@@ -29,8 +30,7 @@ protected:
 public:
     Dog(std::string EatingType, std::string Type, int LegCount, int Age,
         std::string DogType, std::string Color);
-
-    void Sound();
+    virtual void Sound() override;
 
     friend std::ostream& operator<<(std::ostream& os, const Dog& other);
 };
@@ -43,9 +43,7 @@ private:
 public:
     Tiger(std::string EatingType, std::string Type, int LegCount, int Age,
         std::string Location);
-        
-    void Sound();
-
+    virtual void Sound() override;
     friend std::ostream& operator<<(std::ostream& os, const Tiger& other);
 };
 
@@ -57,9 +55,7 @@ private:
 public:
     Monkey(std::string EatingType, std::string Type, int LegCount, int Age,
         std::string MonkeyType);
-
-    void Sound();
-
+    virtual void Sound() override;
     friend std::ostream& operator<<(std::ostream& os, const Monkey& other);
 };
 
@@ -71,9 +67,7 @@ private:
 public:
     Donkey(std::string EatingType, std::string Type, int LegCount, int Age,
         int DonkeyLoad);
-
-    void Sound();
-
+    virtual void Sound() override;
     friend std::ostream& operator<<(std::ostream& os, const Donkey& other);
 };
 
@@ -85,9 +79,7 @@ private:
 public:
     Horse(std::string EatingType, std::string Type, int LegCount, int Age,
         int HorseSpeed);
-
-    void Sound();
-
+    virtual void Sound() override;
     friend std::ostream& operator<<(std::ostream& os, const Horse& other);
 };
 
@@ -99,9 +91,7 @@ private:
 public:
     Puppy(std::string EatingType, std::string Type, int LegCount, int Age,
         std::string DogType, std::string Color, std::string PuppyGender);
-
-        void Sound();
-
+    virtual void Sound() override;
     friend std::ostream& operator<<(std::ostream& os, const Puppy& other);
 };
 

@@ -5,7 +5,8 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++17
 
 # Source files
-SRC = main.cpp animals.cpp
+SRC = main.cpp animals.cpp zoo.cpp
+
 
 # Header files
 HEADERS = animals.h

@@ -9,6 +9,10 @@ Animals::Animals(std::string EatingType,std::string Type,int LegCount,int Age)
     m_LegCount = LegCount;
     m_Age = Age;
 }
+void Animals::Sound()
+{}
+Animals::~Animals()
+{}
 bool Animals::IsCarnivore() const
 {
     if(m_EatingType == "carnivore")
@@ -42,7 +46,7 @@ Dog::Dog(std::string EatingType,std::string Type,int LegCount,int Age,std::strin
 }
 void Dog::Sound()
 {
-    std::cout << "Dg make sound" << std::endl;
+    std::cout << "Dog make sound" << std::endl;
 }
 std::ostream& operator<<(std::ostream& os,const Dog& other)
 {

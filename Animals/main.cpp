@@ -1,39 +1,19 @@
 #include <iostream>
 #include "animals.h"
+#include "Zoo.h"
 
 int main()
 {
-    Dog dog("carnivore", "pet", 4, 5, "Bulldog", "Brown");
-    Tiger tiger("carnivore", "wild", 4, 7, "Jungle");
-    Monkey monkey("herbivore", "wild", 2, 3, "Capuchin");
-    Donkey donkey("herbivore", "pet", 4, 10, 100);
-    Horse horse("herbivore", "pet", 4, 8, 60);
-    Puppy puppy("carnivore", "pet", 4, 1, "Bulldog", "Light Brown", "Male");
+    Zoo zoo(5);
 
-    std::cout << dog << std::endl;
+    zoo.AddAnimal(new Dog("carnivore", "pet", 4, 5, "Bulldog", "Brown"));
+    zoo.AddAnimal(new Tiger("carnivore", "wild", 4, 7, "Africa"));
+    zoo.AddAnimal(new Monkey("herbivore", "wild", 2, 3, "Capuchin"));
+    zoo.AddAnimal(new Donkey("herbivore", "pet", 4, 6, 120));
+    zoo.AddAnimal(new Horse("herbivore", "pet", 4, 4, 75));
     std::cout << std::endl;
+    zoo.Sounds();
     std::cout << std::endl;
-    std::cout << tiger << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << monkey << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << donkey << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << horse << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << puppy << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    dog.Sound();
-    tiger.Sound();
-    monkey.Sound();
-    donkey.Sound();
-    horse.Sound();
-    puppy.Sound();
 
     return 0;
 }
