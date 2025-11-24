@@ -1,4 +1,5 @@
 #include "Chess.h"
+#include <fstream>
 Matrix::Matrix()
 {
     m_rows = 0;
@@ -71,6 +72,38 @@ Matrix& Matrix::operator=(const Matrix& other)
     }
     return *this;
 }
+Matrix::Matrix(Matrix&& other) 
+{
+    m_matrix = other.m_matrix;
+    m_rows = other.m_rows;
+    m_cols = other.m_cols;
+
+    other.m_matrix = nullptr;
+    other.m_rows = 0;
+    other.m_cols = 0;
+}
+Matrix& Matrix::operator=(Matrix&& other) 
+{
+    if (this != &other)
+    {
+        if (m_matrix != nullptr)
+        {
+            for (int i = 0; i < m_rows; ++i)
+                delete[] m_matrix[i];
+            delete[] m_matrix;
+        }
+
+        m_matrix = other.m_matrix;
+        m_rows   = other.m_rows;
+        m_cols   = other.m_cols;
+        other.m_matrix = nullptr;
+        other.m_rows = 0;
+        other.m_cols = 0;
+    }
+
+    return *this;
+}
+
 std::ostream& operator<<(std::ostream& os,const Matrix& m)
 {
     for(int i = 0; i < m.m_rows; i++)
@@ -86,10 +119,12 @@ std::ostream& operator<<(std::ostream& os,const Matrix& m)
 }
 
 
-Chess::~Chess()
+Chess::~Chess() 
 {
     
 }
+
+
 Chess::Chess(int rows, int cols)
 {
     if(rows == 8 && cols == 8)
@@ -135,6 +170,32 @@ Chess::Chess(int rows, int cols)
         std::cout << "I cant do it\n";
     }
 }
+
+
+Chess::Chess(const Chess& other): Matrix(other)   
+{
+}
+Chess& Chess::operator=(const Chess& other)
+{
+    if (this != &other)
+    {
+        Matrix::operator=(other);
+    }
+    return *this;
+}
+Chess::Chess(Chess&& other) : Matrix(std::move(other))
+{
+}
+Chess& Chess::operator=(Chess&& other) 
+{
+    if (this != &other)
+    {
+        Matrix::operator=(std::move(other)); 
+    }
+    return *this;
+}
+
+
 std::ostream& operator<<(std::ostream& os,const Chess& c)
 {
     for(int i = 0; i < c.m_rows; i++)

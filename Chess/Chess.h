@@ -1,8 +1,7 @@
 #ifndef CHESS_H
 #define CHESS_H
 #include <iostream>
-#include <fstream>
-#include <string>
+
 
 class Matrix
 {
@@ -13,9 +12,11 @@ class Matrix
     public:
         Matrix();
         Matrix(int rows,int cols);
-        ~Matrix();
+        virtual ~Matrix();
         Matrix(const Matrix& other);
+        Matrix(Matrix && other);
         Matrix& operator= (const Matrix& other);
+        Matrix& operator= (Matrix&& other);
         friend std::ostream& operator<<(std::ostream& os,const Matrix& other);
 };
 
@@ -23,8 +24,12 @@ class Chess : public Matrix
 {
     public:
         Chess() = delete;
-        ~Chess();
+        ~Chess() override;
         Chess(int rows,int cols);
+        Chess(const Chess& other);
+        Chess& operator=(const Chess& other);
+        Chess(Chess&& other);
+        Chess& operator=(Chess&& other);
         friend std::ostream& operator<<(std::ostream& os,const Chess& other);
 };
 #endif
