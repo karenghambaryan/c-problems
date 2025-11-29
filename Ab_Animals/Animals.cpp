@@ -2,8 +2,9 @@
 #include <string>
 #include "Animals.h"
 
-Animals::Animals(std::string EatingType,std::string Type,int LegCount,int Age)
+Animals::Animals(int Weight,std::string EatingType,std::string Type,int LegCount,int Age)
 {
+    m_Weight = Weight;
     m_EatingType = EatingType;
     m_Type = Type;
     m_LegCount = LegCount;
@@ -33,9 +34,21 @@ bool Animals::HasOwner() const
     }
     return false;
 }
+bool Animals::operator< (const Animals& other) const
+{
+    return this->m_Weight < other.m_Weight;
+}
+bool Animals::operator== (const Animals& other) const
+{
+    return this->m_Weight == other.m_Weight;
+}
+bool Animals::operator> (const Animals& other) const
+{
+    return this->m_Weight > other.m_Weight;
+}
 
 
-Dog::Dog(std::string EatingType,std::string Type,int LegCount,int Age,std::string DogType,std::string Color) : Animals(EatingType, Type, LegCount, Age)
+Dog::Dog(int Weight,std::string EatingType,std::string Type,int LegCount,int Age,std::string DogType,std::string Color) : Animals(Weight,EatingType, Type, LegCount, Age)
 {
     m_DogType = DogType;
     m_Color = Color;
@@ -77,7 +90,7 @@ std::ostream& operator<<(std::ostream& os,const Dog& other)
     }
     return os;
 }
-Tiger::Tiger(std::string EatingType,std::string Type,int LegCount,int Age,std::string Location) : Animals(EatingType, Type, LegCount, Age)
+Tiger::Tiger(int Weight,std::string EatingType,std::string Type,int LegCount,int Age,std::string Location) : Animals(Weight,EatingType, Type, LegCount, Age)
 {
     m_Location = Location;
 }
@@ -119,7 +132,8 @@ std::ostream& operator<<(std::ostream& os,const Tiger& other)
 }
 
 
-Monkey::Monkey(std::string EatingType,std::string Type,int LegCount,int Age,std::string MonkeyType) : Animals(EatingType, Type, LegCount, Age)
+
+Monkey::Monkey(int Weight,std::string EatingType,std::string Type,int LegCount,int Age,std::string MonkeyType) : Animals(Weight,EatingType, Type, LegCount, Age)
 {
     m_MonkeyType = MonkeyType;
 }

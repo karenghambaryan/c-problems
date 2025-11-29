@@ -6,11 +6,12 @@ class Animals
 protected:
     std::string m_EatingType;
     std::string m_Type;
+    int m_Weight;
     int m_LegCount{};
     int m_Age{};
 
 public:
-    Animals(std::string EatingType, std::string Type, int LegCount, int Age);
+    Animals(int Weight,std::string EatingType, std::string Type, int LegCount, int Age);
     virtual ~Animals() = default;
 public:
     bool IsCarnivore() const;
@@ -18,6 +19,10 @@ public:
     bool HasOwner() const;
 public:
     virtual void Sound() const = 0;
+public:
+    bool operator< (const Animals& other) const;
+    bool operator> (const Animals& other) const;
+    bool operator== (const Animals& other) const;
 };
 
 
@@ -28,7 +33,7 @@ protected:
     std::string m_Color;
 
 public:
-    Dog(std::string EatingType, std::string Type, int LegCount, int Age,
+    Dog(int Weight,std::string EatingType, std::string Type, int LegCount, int Age,
         std::string DogType, std::string Color);
     ~Dog() override = default; 
     void Sound() const override;
@@ -44,8 +49,8 @@ protected:
     std::string m_Location;
 
 public:
-    Tiger(std::string EatingType, std::string Type, int LegCount, int Age,
-          std::string Location);
+    Tiger(int Weight,std::string EatingType, std::string Type, int LegCount, int Age,
+        std::string Location);
     ~Tiger() = default;
     void Sound() const override;
 
@@ -59,8 +64,8 @@ protected:
     std::string m_MonkeyType;
 
 public:
-    Monkey(std::string EatingType, std::string Type, int LegCount, int Age,
-           std::string MonkeyType);
+    Monkey(int Weight,std::string EatingType, std::string Type, int LegCount, int Age,
+        std::string MonkeyType);
     ~Monkey() = default;
     void Sound() const override;
 
