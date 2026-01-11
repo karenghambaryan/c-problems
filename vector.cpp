@@ -1,5 +1,5 @@
-//73: Գրել vector class( դինամիկ զանգված ) մինիմալ հնարավորթյուններով
 #include <iostream>
+#include <initializer_list>
 
 template <typename T>
 
@@ -7,36 +7,74 @@ class vector
 {
     private:
         int m_size;
+        int m_cap;
         T* m_data;
-        void resize(int size)
+        void resize(int new_cap)
         {
-            T* new_data = new T[size];
+            T* new_data = new T[new_cap];
             for(int i = 0; i < m_size; i++)
             {
                 new_data[i] = m_data[i];
             }
             delete[] m_data;
             m_data = new_data;
+            m_cap = new_cap;
         }
     public:
-        vector() : m_size(0),m_data(nullptr)
+        vector() : m_size(0),m_cap(0),m_data(nullptr)
         {
+        }
+        vector(std::initializer_list<T> list) : m_size(list.size()),m_cap(list.size() * 2)
+        {
+            m_data = new T[m_cap];
+            int i = 0;
+            for (const T& value : list)
+            {
+                m_data[i++] = value;
+            }
         }
         ~vector()
         {
             delete[] m_data;        
         }
-        vector(const vector& other)
+        vector(const vector& other) : m_size(other.m_size),m_cap(other.m_cap)
         {
-
+            m_data = new T[m_cap];
+            for(int i = 0; i < m_size; i++)
+            {
+                m_data[i] = other.m_data[i];
+            }
         }
         vector& operator=(const vector& other)
         {
-            
+            if(this != &other)
+            {
+                delete[] m_data;
+                m_size = other.m_size;
+                m_cap = other.m_cap;
+                m_data = new T[m_cap];
+                for(int i = 0; i < m_size; i++)
+                {
+                    m_data[i] = other.m_data[i];
+                }
+            }
+             return *this; 
         }
+
         void push_back(const T& m)
         {
-            resize(m_size + 1);
+            if(m_size == m_cap)
+            {
+                int new_cap;
+                if(m_cap == 0)
+                {
+                    m_cap = 1;
+                }
+                else{
+                    m_cap = m_cap *2;
+                }
+                resize(new_cap);
+            }
             m_data[m_size++] = m;
         }
         void pop_back()
@@ -84,6 +122,11 @@ int main()
         std::cout << *it << "\n";
     }
     
+    vector<int> v1 = {7, 78, 35, 5};
+
+    for (int x : v1)
+        std::cout << x << " ";
+
     
     return 0;
 }
